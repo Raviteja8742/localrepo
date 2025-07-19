@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX User Info</title>
+</head>
+<body>
+
+  <h2>AJAX User Info Fetcher</h2>
+  <button onclick="getUser()">Get User Info</button>
+  <p><strong>Name:</strong> <span id="name"></span></p>
+  <p><strong>Email:</strong> <span id="email"></span></p>
+
+  <script>
+    function getUser() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://localhost:3000/api/user", true);
+
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const user = JSON.parse(xhr.responseText);
+          document.getElementById("name").innerText = user.name;
+          document.getElementById("email").innerText = user.email;
+        } else {
+          alert("Failed to fetch user data.");
+        }
+      };
+
+      xhr.send();
+    }
+  </script>
+
+</body>
+</html>
